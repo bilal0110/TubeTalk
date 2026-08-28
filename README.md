@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎬 Tube AI API
+# 🎬 TubeTalk AI 
 
 ### Ask questions about YouTube videos without watching the entire video.
 
