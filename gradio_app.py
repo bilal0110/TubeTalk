@@ -222,14 +222,14 @@ footer {
 
 
 with gr.Blocks(
-    title="TubeTalk",
+    title="VidChat",
 ) as demo:
 
     video_id_state = gr.State(None)
 
     gr.Markdown(
         """
-        # 🎬 TubeTalk
+        # 🎬 VidChat
         """,
         elem_id="title",
     )
@@ -282,7 +282,7 @@ with gr.Blocks(
     with gr.Group(elem_classes="panel"):
 
         chatbot = gr.Chatbot(
-            label="Tube AI",
+            label="Vid Chat",
             height=450,
         )
 
