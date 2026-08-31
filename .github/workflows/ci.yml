@@ -1,4 +1,4 @@
-name: TubeTalk CI
+name: TubeTalk CI/CD
 
 on:
   push:
@@ -11,6 +11,7 @@ on:
 
 jobs:
   test:
+    name: Run Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -30,3 +31,28 @@ jobs:
       - name: Run tests
         run: |
           pytest
+
+  docker:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+
+    needs: test
+
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: bilaldocker0110/tubetalk:latest
